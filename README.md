@@ -11,10 +11,24 @@ Any contribution, issue, or pull request would be welcome!
 ## Features
 - Optimized to render fast in terminals.
 - Multi-platform (Linux, Windows and MacOS)
+  - For linux, it is required to have a x11 server (most of distribution comes with it).
+    Internally `ruscii` use it to create transparent key pressed and released events.
 - Multi-terminal (See [crossterm terminal support](https://github.com/crossterm-rs/crossterm#tested-terminals))
-- Enable **key press** and **release** events in terminal (essential for games!)
+- Enable **key press** and **release** events in terminal (essential for games!).
 - Easy to use. Make your terminal game in a few lines!
 - Easy way to recover the terminal state at error.
+
+## Dependencies
+To compile `ruscii` in linux, you have to install the X11 development libraries.
+  - In Ubuntu/Debian:
+    ```
+    sudo apt install libx11-dev
+    ```
+  - In Fedora/RHEL/CentOS:
+    ```
+    sudo dnf install xorg-x11-server-devel
+    ```
+Windows and MacOS do not need any special dependency.
 
 ## Examples
 You can found several examples into the [example folder](examples).
@@ -25,7 +39,7 @@ cargo install ruscii --examples
 ~/.cargo/bin/<example_name>
 ```
 
-Or clone the repo and execute inside of it:
+Or clone the repo and run the example:
 ```
 cargo run --example <example_name> --release
 ```
@@ -81,8 +95,8 @@ fn main() {
 ### Debugging
 Debug a terminal app is usually difficult because the app output and the backtrace goes to the same terminal view.
 Ruscii uses the _standard output_ to render data and the _standard error_ to log error information.
-We recommend to redirect the _standard error_ to a file, and the inspect the file.
-The app behavior is the same.
+We recommend to redirect the _standard error_ to a file that can be inspected later.
+
 For example, in `bash` it will be:
 ```
 $ export RUST_BACKTRACE=1

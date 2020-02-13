@@ -8,7 +8,7 @@ pub struct Vec2 {
 }
 
 impl Vec2 {
-    pub fn new() -> Vec2 {
+    pub fn zero() -> Vec2 {
         Vec2 {x: 0, y: 0}
     }
 
@@ -161,7 +161,17 @@ impl Direction {
             Direction::Down => Vec2::y(1),
             Direction::Right => Vec2::x(1),
             Direction::Left => Vec2::x(-1),
-            Direction::None => Vec2::new(),
+            Direction::None => Vec2::zero(),
+        }
+    }
+
+    pub fn opposite(&self) -> Direction {
+        match *self {
+            Direction::Up => Direction::Down,
+            Direction::Down => Direction::Up,
+            Direction::Right => Direction::Left,
+            Direction::Left => Direction::Right,
+            Direction::None => Direction::None,
         }
     }
 }
